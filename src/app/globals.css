@@ -153,10 +153,11 @@ main {
 
 .item-list {
   width: 1000px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
   .item-card {
     background-color: rgb(231, 231, 231);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     border-width: 0.5px 0.5px 0px 0.5px;
     border-style: solid;
     color: #ffffff;

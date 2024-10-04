@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useAuth } from "@/context/auth";
-import ItemCard from "@/app/components/ItemCard";
-import ItemForm from "@/app/components/ItemForm";
-import EditItemForm from "../components/EditItemForm";
+import ItemCard from "@/components/ItemCard";
+import ItemForm from "@/components/ItemForm";
+import EditItemForm from "../../components/EditItemForm";
 
 export default function CreateItemPage() {
   const [items, setItems] = useState([]);
