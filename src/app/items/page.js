@@ -99,14 +99,14 @@ export default function CreateItemPage() {
             <div className="itemName bold">Name</div>
             <div className="itemDescription bold">Description</div>
             <div className="itemQuantity bold">Quantity</div>
-            <div className="itemCategory bold">Category</div>{" "}
-            <div className="itemButtons"></div>
+            <div className="itemCategory bold">Category</div>
+            <div className="itemButtons bold">Edit / Delete</div>
           </div>
 
           {items &&
             items.map((item, i) => (
               <div className="item-card" key={item.id}>
-                <ItemCard {...item} />{" "}
+                <ItemCard {...item} />
                 <div className="itemButtons">
                   <button
                     onClick={() => {
