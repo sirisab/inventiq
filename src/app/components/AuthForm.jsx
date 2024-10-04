@@ -33,15 +33,19 @@ function AuthForm() {
       body: bodyData,
     });
 
-    if (response.ok) {
-      const data = await response.json();
-
-      console.log("data", data);
-      localStorage.setItem("@library/token", data.token);
-      auth.setToken(data.token);
-      router.push("/items");
-      return;
+    if (!response.ok) {
+      const errorData = await response.json(); // Hämta felmeddelandet från servern
+      console.log("Error Status:", response.status); // Logga statuskoden
+      console.log("Error Message:", errorData.message); // Logga felmeddelandet
+      throw new Error(errorData.message || "An error occurred");
     }
+
+    const data = await response.json();
+    localStorage.setItem("@library/token", data.token);
+    auth.setToken(data.token);
+    router.push("/items");
+    return;
+
     setError("Invalid login credentials");
   }
 
@@ -87,18 +91,16 @@ function AuthForm() {
         <button className="form__button form__button--primary">
           {isLogin ? "Login" : "Register"}
         </button>
-        <p className="form__text"></p>
-        <div className="form__group">
-          <button
-            className="form__button form__button--secondary"
-            type="button"
-            onClick={(e) => {
-              setIsLogin(!isLogin);
-            }}
-          >
-            {!isLogin ? "Login" : "Register"}
-          </button>
-        </div>
+
+        <button
+          className="form__button form__button--secondary"
+          type="button"
+          onClick={(e) => {
+            setIsLogin(!isLogin);
+          }}
+        >
+          {!isLogin ? "Login" : "Register"}
+        </button>
       </form>
     </div>
   );

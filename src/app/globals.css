@@ -62,7 +62,7 @@ main {
 
 .auth-form {
   width: 340px;
-  background-color: silver;
+  background-color: rgb(231, 231, 231);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 24px;
   display: flex;
@@ -76,18 +76,25 @@ main {
   .form__input {
     margin: 4px 0px;
   }
+
+  button {
+    color: white;
+    border: 0;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 20px 8px 0px 0px;
+  }
   .form__button--primary {
     background-color: darkblue;
+  }
+  .form__button--secondary {
+    background-color: blue;
   }
 
   .form__group {
     display: flex;
     flex-direction: column;
     margin: 4px 0px;
-
-    .form__button--secondary {
-      background-color: blue;
-    }
   }
 }
 
@@ -96,10 +103,11 @@ main {
 }
 
 .item-form-btn {
-  background-color: peru;
+  background-color: rgb(209, 255, 186);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: rgb(11, 10, 8);
   border: none;
-  margin: 16px 0px 16px 0px;
+  margin: 16px 0px 0px 0px;
   padding: 8px;
   border-radius: 4px;
 }
@@ -108,9 +116,15 @@ main {
   display: flex;
   justify-content: center;
 
-  #itemForm {
-    background-color: rgb(255, 238, 253);
-    padding: 24px;
+  .add {
+    background-color: rgb(209, 255, 186);
+  }
+
+  .edit {
+    background-color: rgb(253, 248, 189);
+  }
+  .item-form {
+    padding: 16px 16px 16px 16px;
     width: 400px;
     height: 200px;
     display: flex;
@@ -121,8 +135,9 @@ main {
     z-index: 5;
 
     .cancel-btn {
-      background-color: rgb(138, 138, 158);
+      background-color: rgb(231, 231, 231);
       color: rgb(28, 20, 20);
+      border: 0.5px solid darkblue;
     }
 
     button {
@@ -131,48 +146,46 @@ main {
       border: 0;
       padding: 8px;
       border-radius: 4px;
-      margin: 8px 8px 0px 0px;
+      margin: 20px 8px 0px 0px;
     }
   }
 }
 
 .item-list {
   width: 1000px;
-  border-width: 0px 0px 0.5px 0px;
-  border-style: solid;
 
   .item-card {
     background-color: rgb(231, 231, 231);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-width: 0.5px 0.5px 0px 0.5px;
     border-style: solid;
-    color: #2d5fb6;
+    color: #ffffff;
     display: flex;
     flex-direction: row;
 
     .itemName {
       background-color: rgb(213, 235, 255);
-      min-width: 160px;
+      width: 160px;
       color: black;
       padding: 8px;
     }
 
     .itemDescription {
-      min-width: 300px;
+      width: 300px;
       background-color: rgb(231, 231, 231);
       padding: 8px;
       color: black;
     }
 
     .itemQuantity {
-      min-width: 100px;
+      width: 100px;
       background-color: rgb(213, 235, 255);
       padding: 8px;
       color: black;
     }
 
     .itemCategory {
-      min-width: 200px;
+      width: 200px;
       background-color: rgb(231, 231, 231);
       padding: 8px;
       color: black;
@@ -182,9 +195,19 @@ main {
       background-color: rgb(213, 235, 255);
       width: 120px;
       padding: 8px;
+      color: black;
 
       button {
-        margin: 4px;
+        margin: 0px 4px;
+        border: none;
+        border-radius: 4px;
+        padding: 8px;
+      }
+      .edit-btn {
+        background-color: rgb(253, 248, 189);
+      }
+      .delete-btn {
+        background-color: rgb(255, 199, 210);
       }
     }
   }

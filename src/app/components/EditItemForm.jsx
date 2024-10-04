@@ -61,9 +61,9 @@ function EditItemForm({
 
   return (
     <div className="item-form-container">
-      <div id="itemForm">
+      <div className="item-form edit">
         <form onSubmit={(e) => handleEdit(e)}>
-          <div className="col-25">Namn:</div>
+          <div className="col-25">Name:</div>
           <div className="col-75">
             <input
               type="text"
@@ -71,7 +71,7 @@ function EditItemForm({
               onChange={(e) => setName(e.target.value)}
             ></input>
           </div>
-          <div className="col-25">Beskrivning:</div>
+          <div className="col-25">Description:</div>
           <div className="col-75">
             <input
               type="text"
@@ -81,7 +81,7 @@ function EditItemForm({
               placeholder={description}
             ></input>
           </div>
-          <div className="col-25">Antal:</div>
+          <div className="col-25">Quantity:</div>
           <div className="col-75">
             <input
               type="number"
@@ -89,7 +89,7 @@ function EditItemForm({
               onChange={(e) => setQuantity(e.target.value)}
             ></input>
           </div>
-          <div className="col-25">Kategorier:</div>
+          <div className="col-25">Category:</div>
           <div className="col-75">
             <input
               type="text"
@@ -98,6 +98,13 @@ function EditItemForm({
             ></input>
           </div>
           <button type="submit">Save changes</button>
+          <button
+            type="reset"
+            className="cancel-btn"
+            onClick={() => setShowEditItemForm(false)}
+          >
+            Cancel
+          </button>
         </form>
       </div>
     </div>
