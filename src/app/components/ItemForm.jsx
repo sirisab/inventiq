@@ -47,9 +47,9 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
 
   return (
     <div className="item-form-container">
-      <div id="itemForm">
+      <div className="item-form add">
         <form onSubmit={handleSubmit}>
-          <div className="col-25">Artikelnamn:</div>
+          <div className="col-25">Name:</div>
           <div className="col-75">
             <input
               type="text"
@@ -58,7 +58,7 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
               id="name"
             ></input>
           </div>
-          <div className="col-25">Beskrivning:</div>
+          <div className="col-25">Description:</div>
           <div className="col-75">
             <input
               type="text"
@@ -67,7 +67,7 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
               id="description"
             ></input>
           </div>
-          <div className="col-25">Antal:</div>
+          <div className="col-25">Quantity:</div>
           <div className="col-75">
             <input
               type="number"
@@ -76,7 +76,7 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
               id="quantity"
             ></input>
           </div>
-          <div className="col-25">Kategorier:</div>
+          <div className="col-25">Category:</div>
           <div className="col-75">
             <input
               type="text"
