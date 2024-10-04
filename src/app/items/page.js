@@ -93,8 +93,6 @@ export default function CreateItemPage() {
           )}
         </div>
         <div className="item-list">
-          <h2>ITEMS</h2>
-
           <div className="item-card">
             <div className="itemName bold">Name</div>
             <div className="itemDescription bold">Description</div>
