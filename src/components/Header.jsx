@@ -8,10 +8,9 @@ function Header() {
 
   return (
     <div className="header">
-      <div className="logo">
-        InventIQ <Link href="../items">Items</Link>
-      </div>
+      <div className="logo">InventIQ</div>
       <div className="logout">
+        <Link href="../items">Items</Link>/
         {auth.token ? (
           <Link href="../" onClick={auth.logout}>
             Logout

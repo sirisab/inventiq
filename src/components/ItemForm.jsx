@@ -14,10 +14,10 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!auth.token) {
-      alert("You need to log in to create an item!");
-      return;
-    }
+    // if (!auth.token) {
+    //   alert("You need to log in to create an item!");
+    //   return;
+    // }
 
     try {
       const response = await fetch("/api/items", {
@@ -46,8 +46,13 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
           ? errorData.message.join(", ") // Om array, slå ihop felmeddelandena till en sträng
           : errorData.message || response.statusText; // Annars visa meddelandet eller statusText
 
-        console.error("Failed to create item:", errorMessage);
-        setError(errorMessage || "Failed to create item");
+        if (response.status === 401) {
+          console.error("Unauthorized:", errorMessage);
+          setError("You are not authorized to create an item. Please log in.");
+        } else {
+          console.error("Failed to create item:", errorMessage);
+          setError(errorMessage || "Failed to create item");
+        }
       }
     } catch (error) {
       console.error("Error submitting the form:", error);
@@ -60,6 +65,7 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
       <div className="item-form">
         <form onSubmit={handleSubmit}>
           <div className="form__group">
+            <h3>Add item</h3>
             <label className="col-25">Name:</label>
             <br />
             <input

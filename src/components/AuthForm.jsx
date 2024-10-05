@@ -65,6 +65,7 @@ function AuthForm() {
       <div className="auth-fields">
         <form onSubmit={handleSubmit}>
           <div className="form__group">
+            <h3>{isLogin ? "Login" : "Register"}</h3>
             <label className="form__label">Email</label>
             <input
               className="form__input"

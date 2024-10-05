@@ -19,11 +19,6 @@ function EditItemForm({
   const handleEdit = async (e) => {
     e.preventDefault();
 
-    if (!auth.token) {
-      alert("You need to log in to add an item!");
-      return;
-    }
-
     try {
       const dataBeingSent = {
         name,
@@ -52,8 +47,13 @@ function EditItemForm({
           ? errorData.message.join(", ") // Om array, slå ihop felmeddelandena till en sträng
           : errorData.message || response.statusText; // Annars visa meddelandet eller statusText
 
-        console.error("Failed to save changes to item:", errorMessage);
-        setError(errorMessage || "Failed to save changes");
+        if (response.status === 401) {
+          console.error("Unauthorized:", errorMessage);
+          setError("You are not authorized to edit this item. Please log in.");
+        } else {
+          console.error("Failed to save changes to item:", errorMessage);
+          setError(errorMessage || "Failed to save changes");
+        }
       }
     } catch (error) {
       console.error("Error submitting the form:", error);
@@ -66,6 +66,7 @@ function EditItemForm({
       <div className="item-form">
         <form onSubmit={(e) => handleEdit(e)}>
           <div className="form__group">
+            <h3>Edit item</h3>
             <label className="col-25">Name:</label>
             <br />
             <input

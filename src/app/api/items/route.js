@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { validateItemData } from "../../../utils/helpers/apiHelpers";
+import { verifyJWT, getAuthHeader } from "@/utils/helpers/authHelpers";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -48,7 +49,22 @@ export async function POST(req) {
       }
     );
   }
+  const token = getAuthHeader(req);
 
+  if (!token) {
+    return NextResponse.json(
+      { message: "Unauthorized - You need to be logged in to post an item" },
+      { status: 401 }
+    );
+  }
+
+  const decoded = verifyJWT(token);
+  if (!decoded) {
+    return NextResponse.json(
+      { message: "Unauthorized - Invalid or expired token" },
+      { status: 401 }
+    );
+  }
   const [hasErrors, errors] = validateItemData(body);
   if (hasErrors) {
     return NextResponse.json(

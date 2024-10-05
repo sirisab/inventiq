@@ -67,7 +67,7 @@ export default function CreateItemPage() {
   return (
     <>
       <main>
-        <div className="item-form">
+        <div className="btn-container">
           <button
             className="item-form-btn"
             onClick={() => {

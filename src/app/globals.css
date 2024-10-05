@@ -46,7 +46,7 @@ main {
 
     a:link,
     a:visited {
-      color: white;
+      color: rgb(225, 225, 225);
     }
     a:hover {
       color: rgb(255, 195, 54);
@@ -57,7 +57,10 @@ main {
   }
 
   .logout {
-    padding: 24px;
+    padding: 36px;
+    display: flex;
+    justify-content: space-between;
+
     a:link,
     a:visited {
       color: white;
@@ -86,6 +89,7 @@ main {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 24px;
   display: flex;
+  margin-top: 24px;
 
   button {
     color: white;
@@ -122,22 +126,28 @@ main {
   text-wrap: balance;
 }
 
-.item-form-btn {
-  background-color: rgb(209, 255, 186);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color: rgb(11, 10, 8);
-  border: none;
-  margin: 16px 0px 0px 0px;
-  padding: 8px;
-  border-radius: 4px;
-}
+.btn-container {
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
 
+  .item-form-btn {
+    background-color: rgb(209, 255, 186);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: rgb(11, 10, 8);
+    border: none;
+    margin: 16px 0px 0px 0px;
+    padding: 8px;
+    border-radius: 4px;
+  }
+}
 .add {
   background-color: rgb(209, 255, 186);
 }
 
 .edit {
-  background-color: rgb(253, 248, 189);
+  background-color: rgb(250, 246, 208);
 }
 
 .item-form-container {
@@ -148,6 +158,7 @@ main {
   align-items: end;
   justify-content: center;
   position: absolute;
+  margin-top: 16px;
 
   input {
     margin: 4px 0px;
@@ -227,10 +238,10 @@ main {
         padding: 8px;
       }
       .edit-btn {
-        background-color: rgb(253, 248, 189);
+        background-color: rgb(250, 246, 208);
       }
       .delete-btn {
-        background-color: rgb(255, 199, 210);
+        background-color: rgb(251, 216, 223);
       }
     }
   }
