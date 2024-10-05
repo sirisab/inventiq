@@ -38,7 +38,6 @@ export async function POST(req) {
   let body;
   try {
     body = await req.json();
-    console.log("Received body:", body);
   } catch (error) {
     return NextResponse.json(
       {
@@ -73,7 +72,6 @@ export async function POST(req) {
       },
     });
   } catch (error) {
-    console.log(error.message);
     return NextResponse.json(
       {
         message: "Invalid data sent for item creation",
@@ -88,18 +86,3 @@ export async function POST(req) {
     status: 201,
   });
 }
-
-// export async function DELETE(options) {
-//   const id = options.params.id;
-
-//   try {
-//     await prisma.item.delete({
-//       where: { id: Number(id) },
-//     });
-//     return new Response(null, {
-//       status: 204,
-//     });
-//   } catch (error) {
-//     return object404Response(NextResponse, "Item");
-//   }
-// }

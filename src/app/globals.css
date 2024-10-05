@@ -43,6 +43,17 @@ main {
     font-weight: 700;
     font-style: normal;
     padding: 24px;
+
+    a:link,
+    a:visited {
+      color: white;
+    }
+    a:hover {
+      color: rgb(255, 195, 54);
+    }
+    a:active {
+      color: rgb(148, 105, 4);
+    }
   }
 
   .logout {
@@ -60,20 +71,21 @@ main {
   }
 }
 
-.auth-form {
+.error-message {
+  width: 200px;
+  color: red;
+  display: flex;
+  align-items: end;
+  margin-left: 12px;
+  margin-bottom: 12px;
+}
+
+.auth-form-container {
   width: 340px;
   background-color: rgb(231, 231, 231);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 24px;
   display: flex;
-
-  .error-message {
-    width: 200px;
-    color: red;
-    display: flex;
-    align-items: end;
-    margin-left: 20px;
-  }
 
   button {
     color: white;
@@ -120,43 +132,41 @@ main {
   border-radius: 4px;
 }
 
+.add {
+  background-color: rgb(209, 255, 186);
+}
+
+.edit {
+  background-color: rgb(253, 248, 189);
+}
+
 .item-form-container {
+  width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 24px;
   display: flex;
+  align-items: end;
   justify-content: center;
+  position: absolute;
 
-  .add {
-    background-color: rgb(209, 255, 186);
+  input {
+    margin: 4px 0px;
+  }
+  .cancel-btn {
+    background-color: rgb(231, 231, 231);
+    color: rgb(28, 20, 20);
+    border: 0.5px solid darkblue;
   }
 
-  .edit {
-    background-color: rgb(253, 248, 189);
+  button {
+    background-color: darkblue;
+    color: white;
+    border: 0;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 20px 8px 0px 0px;
   }
-  .item-form {
-    padding: 16px 16px 16px 16px;
-    width: 400px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    z-index: 5;
-
-    .cancel-btn {
-      background-color: rgb(231, 231, 231);
-      color: rgb(28, 20, 20);
-      border: 0.5px solid darkblue;
-    }
-
-    button {
-      background-color: darkblue;
-      color: white;
-      border: 0;
-      padding: 8px;
-      border-radius: 4px;
-      margin: 20px 8px 0px 0px;
-    }
-  }
+  /* } */
 }
 
 .item-list {
@@ -167,7 +177,7 @@ main {
   .item-card {
     background-color: rgb(231, 231, 231);
 
-    border-width: 0.5px 0.5px 0px 0.5px;
+    border-width: 0.5px 0px 0px 0px;
     border-style: solid;
     color: #ffffff;
     display: flex;
@@ -206,6 +216,9 @@ main {
       width: 120px;
       padding: 8px;
       color: black;
+      border-width: 0.5px 0px 0px 0px;
+      border-style: solid;
+      border-color: white;
 
       button {
         margin: 0px 4px;

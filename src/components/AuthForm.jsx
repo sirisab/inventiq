@@ -41,11 +41,7 @@ function AuthForm() {
         if (contentType && contentType.includes("application/json")) {
           errorData = await response.json(); // Hämta felmeddelandet som JSON
 
-          console.log("Full error data:", errorData);
-
           if (errorData.message) {
-            console.log("Error Status:", response.status); // Logga statuskoden
-            console.log("Error Message:", errorData.message); // Logga felmeddelandet
             setError(errorData.message || "Invalid login credentials");
           } else {
             setError("An unknown error occurred");
@@ -65,7 +61,7 @@ function AuthForm() {
     }
   }
   return (
-    <div className="auth-form">
+    <div className="auth-form-container">
       <div className="auth-fields">
         <form onSubmit={handleSubmit}>
           <div className="form__group">

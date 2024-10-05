@@ -107,6 +107,7 @@ export default function CreateItemPage() {
                 <ItemCard {...item} />
                 <div className="itemButtons">
                   <button
+                    className="edit-btn"
                     onClick={() => {
                       editItem(item.id);
                     }}
@@ -114,6 +115,7 @@ export default function CreateItemPage() {
                     Edit
                   </button>
                   <button
+                    className="delete-btn"
                     onClick={() => {
                       deleteItem(item.id);
                     }}

@@ -1,25 +1,29 @@
 import { NextResponse } from "next/server";
 
 export function validateItemData(data) {
-  let errors = {};
+  let errors = [];
+
   if (data.id && data.id !== item.id) {
-    errors.id = "Mismatch of ids";
+    errors.push("Mismatch of ids");
   }
+
   if (!data.name || typeof data.name !== "string") {
-    errors.name = "Name is required";
+    errors.push("Name is required");
   }
+
   if (!data.description || typeof data.description !== "string") {
-    errors.description = "Description is required";
+    errors.push("Description is required");
   }
+
   if (!data.quantity || !Number(data.quantity)) {
-    errors.quantity = "Enter a quantity";
+    errors.push("Enter a quantity");
   }
 
   if (!data.category || typeof data.category !== "string") {
-    errors.category = "Category is required";
+    errors.push("Category is required");
   }
-  const hasErrors = Object.keys(errors).length > 0;
-  return [hasErrors, errors];
+
+  return [errors.length > 0, errors]; // hasErrors = true, errors = array of messages
 }
 
 export async function validateJSONData(req) {

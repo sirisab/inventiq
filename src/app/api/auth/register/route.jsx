@@ -63,8 +63,6 @@ export async function POST(req) {
         },
       });
 
-      console.log("User registered: ", user);
-
       const token = await signJWT({
         userId: user.id,
       });
@@ -74,7 +72,6 @@ export async function POST(req) {
         token,
       });
     } catch (error) {
-      console.log(error);
       return NextResponse.json(
         {
           message: error.message,
@@ -85,7 +82,6 @@ export async function POST(req) {
       );
     }
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       {
         error:

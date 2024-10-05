@@ -10,7 +10,6 @@ export async function POST(req) {
 
   try {
     body = await req.json();
-    console.log(body);
 
     if (!body.email) {
       return NextResponse.json(
@@ -47,7 +46,6 @@ export async function POST(req) {
     const isPasswordValid = await bcrypt.compare(body.password, user.password);
 
     if (!isPasswordValid) {
-      console.log(body.password, user.password);
       return NextResponse.json(
         { message: "Invalid password" },
         { status: 401 } // Unauthorized status

@@ -11,7 +11,6 @@ const prisma = new PrismaClient();
 
 export async function GET(options) {
   const id = options.params.id;
-  console.log(options.params);
 
   try {
     const item = await prisma.item.findUniqueOrThrow({
@@ -21,7 +20,6 @@ export async function GET(options) {
     });
     return NextResponse.json(item);
   } catch (error) {
-    console.log(error);
     return object404Response(NextResponse, "Item");
   }
 }
@@ -65,7 +63,7 @@ export async function PUT(req, options) {
     console.error("Item validation errors:", errors.join(", "));
     return NextResponse.json(
       {
-        message: "Validation errors: " + errors.join(", "),
+        message: errors.join(", "),
       },
       {
         status: 400,
