@@ -11,7 +11,6 @@ const prisma = new PrismaClient();
 
 export async function GET(options) {
   const id = options.params.id;
-  console.log(options.params);
 
   try {
     const item = await prisma.item.findUniqueOrThrow({
@@ -21,7 +20,6 @@ export async function GET(options) {
     });
     return NextResponse.json(item);
   } catch (error) {
-    console.log(error);
     return object404Response(NextResponse, "Item");
   }
 }
@@ -32,15 +30,23 @@ export async function PUT(req, options) {
 
   if (!token) {
     return NextResponse.json(
-      { message: "Unauthorized - No token provided" },
+      { message: "Unauthorized - You need to be logged in to edit an item" },
       { status: 401 }
     );
   }
 
-  const decoded = verifyJWT(token);
-  if (!decoded) {
+  let decoded;
+  try {
+    decoded = verifyJWT(token);
+    if (!decoded) {
+      return NextResponse.json(
+        { message: "Unauthorized - Invalid or expired token" },
+        { status: 401 }
+      );
+    }
+  } catch (error) {
     return NextResponse.json(
-      { message: "Unauthorized - Invalid or expired token" },
+      { message: "Unauthorized - Invalid token format" },
       { status: 401 }
     );
   }
@@ -65,7 +71,7 @@ export async function PUT(req, options) {
     console.error("Item validation errors:", errors.join(", "));
     return NextResponse.json(
       {
-        message: "Validation errors: " + errors.join(", "),
+        message: errors.join(", "),
       },
       {
         status: 400,
@@ -92,17 +98,14 @@ export async function PUT(req, options) {
         message: "Item successfully updated",
       },
       {
-        status: 204,
+        status: 200,
       }
     );
   } catch (error) {
+    console.error("Error updating item:", error.message);
     return NextResponse.json(
-      {
-        message: error.message,
-      },
-      {
-        status: 500,
-      }
+      { message: "Failed to update item" },
+      { status: 500 }
     );
   }
 }
@@ -112,17 +115,27 @@ export async function DELETE(req, options) {
   const itemId = options.params.id;
 
   if (!token) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-
-  const decoded = verifyJWT(token);
-  if (!decoded) {
     return NextResponse.json(
-      { message: "Unauthorized - Invalid or expired token" },
+      { message: "Unauthorized – You need to be logged in to delete an item." },
       { status: 401 }
     );
   }
 
+  let decoded;
+  try {
+    decoded = verifyJWT(token);
+    if (!decoded) {
+      return NextResponse.json(
+        { message: "Unauthorized - Invalid or expired token" },
+        { status: 401 }
+      );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Unauthorized - Invalid token format" },
+      { status: 401 }
+    );
+  }
   const item = await prisma.item.findUnique({
     where: { id: Number(itemId) },
   });
@@ -135,18 +148,20 @@ export async function DELETE(req, options) {
     await prisma.item.delete({
       where: { id: Number(itemId) },
     });
-    return NextResponse.json({
-      status: 204,
-    });
+
+    return NextResponse.json(
+      { message: "Item successfully deleted" },
+      { status: 200 } // 200 för att signalera att objektet raderades
+    );
   } catch (error) {
-    console.error("Error deleting item:", error);
+    console.error("Error deleting item:", error.message);
 
     return NextResponse.json(
       {
         message: "Failed to delete item",
       },
       {
-        status: 400,
+        status: 500,
       }
     );
   }

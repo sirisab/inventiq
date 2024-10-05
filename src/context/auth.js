@@ -22,20 +22,9 @@ function AuthProvider({ children }) {
   }, []);
 
   function logout() {
-    console.log("Logging out...");
-
-    // Kontrollera om token är satt
-    console.log("Token before logout:", token);
-
     setToken(null);
 
-    // Kontrollera om token är uppdaterad till null
-    console.log("Token after logout:", token);
-
     localStorage.removeItem("@library/token");
-
-    // Kontrollera om localStorage är rensat
-    console.log("Token removed from localStorage");
   }
 
   return (

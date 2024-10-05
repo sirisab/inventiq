@@ -6,13 +6,11 @@ import { useAuth } from "@/context/auth";
 function Header() {
   const auth = useAuth();
 
-  // Lägg till en logg för att verifiera att auth.logout är tillgänglig
-  console.log("Auth object:", auth);
-
   return (
     <div className="header">
       <div className="logo">InventIQ</div>
       <div className="logout">
+        <Link href="../items">Items</Link>/
         {auth.token ? (
           <Link href="../" onClick={auth.logout}>
             Logout
