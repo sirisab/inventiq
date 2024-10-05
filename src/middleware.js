@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { verifyJWT, getAuthHeader } from "./utils/helpers/authHelpers";
+import { verifyJWT } from "./utils/helpers/authHelpers";
 
 const unsafeMethods = ["POST", "PUT", "DELETE"];
 
