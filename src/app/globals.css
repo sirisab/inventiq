@@ -67,6 +67,14 @@ main {
   padding: 24px;
   display: flex;
 
+  .error-message {
+    width: 200px;
+    color: red;
+    display: flex;
+    align-items: end;
+    margin-left: 20px;
+  }
+
   button {
     color: white;
     border: 0;

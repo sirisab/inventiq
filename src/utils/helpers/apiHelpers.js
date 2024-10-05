@@ -31,6 +31,22 @@ export async function validateJSONData(req) {
   }
 }
 
+export function validateUserData(data) {
+  let errors = {};
+  if (!data.name || typeof data.name !== "string") {
+    errors.name = "Name is required";
+  }
+  if (!data.email) {
+    errors.email = "Email is required";
+  }
+  if (!data.password) {
+    errors.password = "Password is required";
+  }
+
+  const hasErrors = Object.keys(errors).length > 0;
+  return [hasErrors, errors];
+}
+
 export function object404Response(response, model = "") {
   return NextResponse.json(
     {

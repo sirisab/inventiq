@@ -16,92 +16,108 @@ function AuthForm() {
   const bodyData = JSON.stringify({
     email,
     password,
-    name: !name ? "" : name,
+    name,
   });
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
 
-    console.log(bodyData);
-    const url = isLogin ? "/api/auth/login" : "/api/auth/register";
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: bodyData,
-    });
+    try {
+      const url = isLogin ? "/api/auth/login" : "/api/auth/register";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: bodyData,
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json(); // Hämta felmeddelandet från servern
-      console.log("Error Status:", response.status); // Logga statuskoden
-      console.log("Error Message:", errorData.message); // Logga felmeddelandet
-      throw new Error(errorData.message || "An error occurred");
+      if (!response.ok) {
+        let errorData = {};
+
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+          errorData = await response.json(); // Hämta felmeddelandet som JSON
+
+          console.log("Full error data:", errorData);
+
+          if (errorData.message) {
+            console.log("Error Status:", response.status); // Logga statuskoden
+            console.log("Error Message:", errorData.message); // Logga felmeddelandet
+            setError(errorData.message || "Invalid login credentials");
+          } else {
+            setError("An unknown error occurred");
+          }
+        } else {
+          setError("Error: Server did not return JSON");
+        }
+        return;
+      }
+      const data = await response.json();
+      localStorage.setItem("@library/token", data.token);
+      auth.setToken(data.token);
+      router.push("/items");
+    } catch (error) {
+      console.error("Caught error:", error.message);
+      setError("Registration failed: " + error.message); // Visa felmeddelande till användaren
     }
-
-    const data = await response.json();
-    localStorage.setItem("@library/token", data.token);
-    auth.setToken(data.token);
-    router.push("/items");
-    return;
-
-    setError("Invalid login credentials");
   }
-
   return (
     <div className="auth-form">
-      <form onSubmit={handleSubmit}>
-        <div className="form__group">
-          <label className="form__label">Email</label>
-          <input
-            className="form__input"
-            type="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div className="form__group">
-          <label className="form__label">Password</label>
-          <input
-            className="form__input"
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          ></input>
-        </div>
-        {!isLogin && (
+      <div className="auth-fields">
+        <form onSubmit={handleSubmit}>
           <div className="form__group">
-            <label className="form__label">Name</label>
+            <label className="form__label">Email</label>
             <input
               className="form__input"
-              type="text"
-              value={name}
+              type="email"
+              value={email}
               onChange={(e) => {
-                setName(e.target.value);
+                setEmail(e.target.value);
               }}
             ></input>
           </div>
-        )}
-
-        <button className="form__button form__button--primary">
-          {isLogin ? "Login" : "Register"}
-        </button>
-
-        <button
-          className="form__button form__button--secondary"
-          type="button"
-          onClick={(e) => {
-            setIsLogin(!isLogin);
-          }}
-        >
-          {!isLogin ? "Login" : "Register"}
-        </button>
-      </form>
+          <div className="form__group">
+            <label className="form__label">Password</label>
+            <input
+              className="form__input"
+              type="password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            ></input>
+          </div>
+          {!isLogin && (
+            <div className="form__group">
+              <label className="form__label">Name</label>
+              <input
+                className="form__input"
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              ></input>
+            </div>
+          )}
+          <button className="form__button form__button--primary">
+            {isLogin ? "Login" : "Register"}
+          </button>
+          <button
+            className="form__button form__button--secondary"
+            type="button"
+            onClick={(e) => {
+              setIsLogin(!isLogin);
+            }}
+          >
+            {!isLogin ? "Login" : "Register"}
+          </button>
+        </form>
+      </div>
+      {error && <div className="error-message">{error}</div>}{" "}
     </div>
   );
 }
