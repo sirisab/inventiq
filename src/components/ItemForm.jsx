@@ -14,11 +14,6 @@ const ItemForm = ({ setRefreshTrigger, setNewItem, setShowItemForm }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // if (!auth.token) {
-    //   alert("You need to log in to create an item!");
-    //   return;
-    // }
-
     try {
       const response = await fetch("/api/items", {
         method: "POST",
